@@ -14,6 +14,4 @@
 
 Файл для CI-системы располагается в отдельной ветке
 Статус:
-Status of Last Deployment:<br>
-<img src="https://github/com/WeyzyG/TZ3/workflows/test_my_project/badge/svg?branch=master"><br>
 ![Status](https://github.com/WeyzyG/TZ3/actions/workflows/CI.yml/badge.svg)
