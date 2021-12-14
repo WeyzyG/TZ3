@@ -16,3 +16,4 @@
 Статус:
 Status of Last Deployment:<br>
 <img src="https://github/com/WeyzyG/TZ3/workflows/test_my_project/badge/svg?branch=master"><br>
+![example workflow](https://github.com/WeyzyG/TZ3/actions/workflows/CI/badge.svg)
