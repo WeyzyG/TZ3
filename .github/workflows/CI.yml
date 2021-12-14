@@ -1,13 +1,21 @@
-name: test_my_project
+name: Test WaylonWalker.com
+
 on:
   push:
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '* */6 * * *'
+
 jobs:
-  test-job:
+  test-site:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Print Starting message 
-      run: echo "Starting tests"
-    - name: Git clone my repo
-      uses: actions/checkout@v1
+    - uses: actions/checkout@main
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - run: pip install -r data.txt
+    - run: test
