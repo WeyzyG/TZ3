@@ -1,19 +1,2 @@
 name: Test_my_functions
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  schedule:
-    - cron: '* */6 * * *'
 
-jobs:
-  test-site:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@main
-    - uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
-    - run: test
