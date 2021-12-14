@@ -5,7 +5,7 @@ from myscript import find_max, find_min, find_sum, find_prod, find_mean, data
 
 class TestStringMethods(unittest.TestCase):
     def test_max(self):
-        self.assertEqual(find_max(), max(data))
+        self.assertEqual(find_max(), min(data))
 
     def test_min(self):
         self.assertEqual(find_min(), min(data))
