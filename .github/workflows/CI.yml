@@ -1,5 +1,4 @@
-name: Test WaylonWalker.com
-
+name: Test_my_functions
 on:
   push:
     branches: [ main ]
