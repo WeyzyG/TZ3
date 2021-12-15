@@ -1,2 +1,5 @@
 name: Test_my_functions
 
+on:
+  push:
+  
