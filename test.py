@@ -9,7 +9,7 @@ t_1 = time()
 class SomeTest(unittest.TestCase):
 
     def test_max(self):
-        self.assertEqual(find_max(), max())
+        self.assertEqual(find_max(), max(data))
 
     def test_min(self):
         self.assertEqual(find_min(), min(data))
