@@ -2,4 +2,22 @@ name: Test_my_functions
 
 on:
   push:
-  
+    branches: [ main ]
+  pull_request:   
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install_python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install_deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install requirements.txt
+      - name: Run_flake8
+        run: flake 8
