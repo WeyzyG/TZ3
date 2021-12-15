@@ -16,5 +16,3 @@ class TestStringMethods(unittest.TestCase):
     def test_prod(self):
         self.assertEqual(find_prod(), math.prod(data))
 
-    def test_mean(self):
-        self.assertEqual(find_mean(), mean(data))
