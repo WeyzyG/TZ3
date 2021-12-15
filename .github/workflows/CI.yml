@@ -1,4 +1,4 @@
-name: Test_my_functions
+name: Test_me
 
 on:
   push:
