@@ -50,5 +50,5 @@ jobs:
           format: html
           message: |
             ${{ github.actor }} внёс изменения в репозиторий:
-            Комментарий: ${{ github.event.commits[0].message }}
+            Изменения: ${{ github.event.commits[0].message }}
 
