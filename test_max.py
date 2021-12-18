@@ -1,5 +1,5 @@
 import unittest
-from myscript import find_max, dat
+from myscript import find_max, data
 
 
 class SomeTest(unittest.TestCase):
