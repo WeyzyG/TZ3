@@ -3,7 +3,7 @@ name: Test_me
 on: [push, workflow_dispatch]
 
 jobs:
-  build:
+  try_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
