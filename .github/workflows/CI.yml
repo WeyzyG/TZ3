@@ -1,25 +1,91 @@
-name: Test_me
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:   
-    branches: [ main ]
-
+name: Testing project code
+on: [push, workflow_dispatch]
 jobs:
-  run_tests:
-    runs-on: [ubuntu-latest]
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-python@v1
+      - uses: actions/checkout@v2
+      - name: Install python
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
-          architecture: 'x64'
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run tests
-        run: coverage run test.py
-      - name: Tests report
-        run: coverage report
-      
-      
+          python-version: 3.9
+      - name: Run valid test
+        id: test1
+        continue-on-error: true
+        run: python -m unittest testValid.py
+      - name: Run min test
+        id: test2
+        continue-on-error: true
+        run: python -m unittest testMin.py
+      - name: Run max test
+        id: test3
+        continue-on-error: true
+        run: python -m unittest testMax.py
+      - name: Run sum test
+        id: test4
+        continue-on-error: true
+        run: python -m unittest testSum.py
+      - name: Run multiply test
+        id: test5
+        continue-on-error: true
+        run: python -m unittest testMultiply.py
+      - name: Run speed tests
+        id: test6
+        continue-on-error: true
+        run: python -m unittest speedTests.py
+      - name: Setup variables
+        id: amogus
+        run: |
+          if [ "${{ steps.test1.outcome }}" = "success" ]; then
+            echo "::set-output name=test1::пройден"
+          else
+            echo "::set-output name=test1::провален"
+          fi
+          if [ "${{ steps.test2.outcome }}" = "success" ]; then
+            echo "::set-output name=test2::пройден"
+          else
+            echo "::set-output name=test2::провален"
+          fi
+          if [ "${{ steps.test3.outcome }}" = "success" ]; then
+            echo "::set-output name=test3::пройден"
+          else
+            echo "::set-output name=test3::провален"
+          fi
+          if [ "${{ steps.test4.outcome }}" = "success" ]; then
+            echo "::set-output name=test4::пройден"
+          else
+            echo "::set-output name=test4::провален"
+          fi
+          if [ "${{ steps.test5.outcome }}" = "success" ]; then
+            echo "::set-output name=test5::пройден"
+          else
+            echo "::set-output name=test5::провален"
+          fi
+          if [ "${{ steps.test6.outcome }}" = "success" ]; then
+            echo "::set-output name=test6::пройден"
+          else
+            echo "::set-output name=test6::провален"
+          fi
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: html
+          message: |
+            ${{ github.actor }} внёс изменения в репозиторий:
+            Комментарий: ${{ github.event.commits[0].message }}
+            
+            Результаты тестов:
+            1) Тест на корректное считывание: <b><u>${{ steps.amogus.outputs.test1 }}</u></b>
+            2) Тест на корректное вычисление минимума: <b><u>${{ steps.amogus.outputs.test2 }}</u></b>
+            3) Тест на корректное вычисление максимума: <b><u>${{ steps.amogus.outputs.test3 }}</u></b>
+            4) Тест на корректное вычисление суммы: <b><u>${{ steps.amogus.outputs.test4 }}</u></b>
+            5) Тест на корректное вычисление произведения: <b><u>${{ steps.amogus.outputs.test5 }}</u></b>
+            6) Тесты на скорость: <b><u>${{ steps.amogus.outputs.test6 }}</u></b>
+            
+            Репозиторий: ${{ github.repository }}
+            
+            СсылОчка: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            
+            Кстати, если вы это читаете - то Аня жопа а я сделяль телеграм интеграцию :3
