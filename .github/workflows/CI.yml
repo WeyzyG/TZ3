@@ -42,4 +42,13 @@ jobs:
         continue-on-error: true
         run: python -m unittest test_time.py
       
+      - name: telegram
+        uses: appleboy/telegram-action@WeyzyG
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: html
+          message: |
+            ${{ github.actor }} внёс изменения в репозиторий:
+            Комментарий: ${{ github.event.commits[0].message }}
 
